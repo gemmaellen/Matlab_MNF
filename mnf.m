@@ -40,8 +40,8 @@ W = F * V;
 A = W(:, 1:k);
 
 % Project onto reduced set of vectors
-proj = data * ((F * F')\W);
-reconst = proj * W' + means_matrix;
+proj = data * ((F * F')\A);
+reconst = proj * A' + means_matrix;
 
 
 
