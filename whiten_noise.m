@@ -9,11 +9,11 @@ function data_whitened = whiten_noise(data, N)
 assert(all(size(data) == size(N)))
 
 % Calculate SVD of noise.
-[Un, Sn, ~] = svd(N, 'econ');
+[~, Sn, Vn] = svd(N, 'econ');
 
 Sn = sparse(Sn); % so MATLAB will know it's diagonal
 
 % noise whitening matrix
-F = Un / Sn; % use right divide to compute inverse
+F = (Vn / Sn) * Vn' ; % use right divide to compute inverse
 
-data_whitened = F' * data;
+data_whitened = data*F;
