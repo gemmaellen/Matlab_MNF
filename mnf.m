@@ -31,13 +31,16 @@ data = data - means_matrix;
 
 
 % Get principal components from data with whitened noise
-[~, ~, V] = svd(data_whitened);
+[~, ~, V] = svds(data_whitened, k);
 
 % Transform back into original co-ordinates
 W = F * V;
 
-% Reduce our space
-A = W(:, 1:k);
+% % Reduce our space
+% A = W(:, 1:k);
+
+% Space was already reduced.
+A = W;
 
 % Project onto reduced set of vectors
 proj = data * ((F * F')\A);
