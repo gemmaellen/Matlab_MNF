@@ -21,6 +21,10 @@ function [reconst, A] = mnf(data, m1, m2, k)
 % Estimate the noise
 N = noise_estimate(data, m1, m2);
 
+% Centre the data
+means_by_wavenumber = sum(data)/(m1 * m2);
+means_matrix = ones(m1 * m2, 1) * means_by_wavenumber;
+data = data - means_matrix;
 
 % Use this estimate to whiten the noise
 data_whitened = whiten_noise(data, N);
@@ -31,7 +35,7 @@ data_whitened = whiten_noise(data, N);
 
 
 % Reconstitute original data using those k principal components
-reconst = data * (A * A');
+reconst = data * (A * A') + means_matrix;
 
 
 
