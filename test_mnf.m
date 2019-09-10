@@ -45,13 +45,13 @@ N = noise_estimate(C, m1, m2);
 
 [reconst, A1] = mnf(C, m1, m2, 1);
 
-% figure
-% plot(C)
-% title('data with noise')
-% 
-% figure
-% plot(reconst)
-% title('denoised with mnf')
+figure
+plot(C)
+title('data with noise')
+
+figure
+plot(reconst)
+title('denoised with mnf')
 
 %% Try on some larger files
 
